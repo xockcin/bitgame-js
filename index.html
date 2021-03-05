@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-  <title>bitgame</title>
+  <title>Title</title>
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport"
@@ -13,90 +13,52 @@
     href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
     crossorigin="anonymous">
+  <link rel="stylesheet" href="css/styles.css">
 </head>
 
-<body class="bg-dark">
-
-  <div class="container-flex p-2 justify-content-center mt-5" id="gamespace">
-    <div class="d-inline-flex border border-dark rounded-pill w-50 justify-content-around mb-3 bg-secondary" id="bytearray">
-        <button class="bit btn m-2 border border-dark rounded-pill" id="btn7" style="background-color: white;">hello</button>
-        <button class="bit btn m-2 border border-dark rounded-pill" id="btn6" style="background-color: white;">hello</button>
-        <button class="bit btn m-2 border border-dark rounded-pill" id="btn5" style="background-color: white;">hello</button>
-        <button class="bit btn m-2 border border-dark rounded-pill" id="btn4" style="background-color: white;">hello</button>
-        <button class="bit btn m-2 border border-dark rounded-pill" id="btn3" style="background-color: white;">hello</button>
-        <button class="bit btn m-2 border border-dark rounded-pill" id="btn2" style="background-color: white;">hello</button>
-        <button class="bit btn m-2 border border-dark rounded-pill" id="btn1" style="background-color: white;">hello</button>
-        <button class="bit btn m-2 border border-dark rounded-pill" id="btn0" style="background-color: white;">hello</button>
+<body>
+  <!-- game space -->
+  <div id="jumbotron" class="container-flex d-flex flex-row justify-content-around rounded-pill m-2">
+    <div id="origin" class="bg-info text-white border rounded m-4">
+      
+      <h1 class="p-1 m-0">43</h1>
     </div>
-    <div class="d-inline-flex border border-danger bg-primary w-50 justify-content-around" id="keypad">
-      <button class="btn btn-lg border btn-danger m-2" id="increment">++</button>
-      <button class="btn btn-lg border btn-danger m-2" id="left-shift"><<</button>
-      <button class="btn btn-lg border btn-danger m-2" id="complement">~</button>
-      <button class="btn btn-lg border btn-danger m-2" id="right-shift">>></button>
-      <button class="btn btn-lg border btn-danger m-2" id="decrement">--</button>
+    <div
+      class="step bg-success text-white border rounded m-4">
+      <h1 class="p-1 m-0">2B</h1>
+    </div>
+    <div id="goal" class="bg-danger text-white border border-white rounded m-4">
+      <h1 class="p-1 m-0">'+'</h1>
+    </div>
+  </div>
+  
+  <!-- game board -->
+  <div class="container bg-secondary w-75 border rounded p-3 mt-4">
+    <div class="d-flex bg-info rounded-pill justify-content-around">
+      <div class="btn-group" role="group">
+        <button data-index="7" data-on="no" class="btn m-2 border btn-light border-dark rounded">7</button>
+        <button data-index="6" data-on="no" class="btn m-2 border btn-light border-dark rounded">6</button>
+        <button data-index="5" data-on="yes" class="btn m-2 border btn-dark border-dark rounded">5</button>
+        <button data-index="4" data-on="no" class="btn m-2 border btn-light border-dark rounded">4</button>
+        <button data-index="3" data-on="yes" class="btn m-2 border btn-dark border-dark rounded">3</button>
+        <button data-index="2" data-on="no" class="btn m-2 border btn-light border-dark rounded">2</button>
+        <button data-index="1" data-on="yes" class="btn m-2 border btn-dark border-dark rounded">1</button>
+        <button data-index="0" data-on="yes" class="btn m-2 border btn-dark border-dark rounded">0</button>
+      </div>
+    </div>
+    <hr>
+    <div class="d-flex bg-success rounded-pill justify-content-around">
+      <div class="btn-group" role="group">
+        <button class="btn m-2 mx-3 border btn-danger rounded btn-lg">+</button>
+        <button class="btn m-2 mx-3 border btn-danger rounded btn-lg"><</button>
+        <button class="btn m-2 mx-3 border btn-danger rounded btn-lg">~</button>
+        <button class="btn m-2 mx-3 border btn-danger rounded btn-lg">></button>
+        <button class="btn m-2 mx-3 border btn-danger rounded btn-lg">-</button>
+      </div>
     </div>
   </div>
 
   <!-- Optional JavaScript -->
-
-  <script>
-    $(document).ready(function() {
-
-      const byte = [false, true, false, false, false, false, true, false]
-
-      function toNumber(byte) {
-        let num = 0
-        byte.map((bit, index) => num += +bit<<index)
-        return num
-      }
-
-      function toString(byte) {
-        let str = ""
-        byte.reverse()
-        byte.map(bit => str += +bit)
-        return str
-      }
-
-      function update(byte) {
-        byte.map((bit, index) => {
-          console.log(bit)
-          if (bit) {
-            $("#btn"+index).css("background-color: yellow")
-          } else {
-            $("#btn" + index).css("background-color: white")
-          }
-        })
-      }
-
-
-      $("#increment").click(() => {
-        byteArray.increment()
-        update(byteArray.bytes)
-      })
-
-      $("#decrement").click(() => {
-        byteArray.decrement()
-        update(byteArray.bytes)
-      })
-
-      $("#left-shift").click(() => {
-        byteArray.leftShift()
-        update(byteArray.bytes)
-      })
-
-      $("#right-shift").click(() => {
-        byteArray.rightShift()
-        update(byteArray.bytes)
-      })
-
-      $("#complement").click(() => {
-        byteArray.complement()
-        update(byteArray.bytes)
-      })
-
-    })
-  </script>
-
   <!-- jQuery first, then Popper.js, then Bootstrap JS -->
   <script
     src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
